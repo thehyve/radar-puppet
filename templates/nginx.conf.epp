@@ -62,5 +62,12 @@ http {
       proxy_pass         http://rest-api:8080/radar/frontend/;
       proxy_set_header   Host $host;
     }
+    location /output/ {
+      alias /var/www/output/;
+      autoindex on;
+      autoindex_format jsonp;
+      auth_basic "RADAR output";
+      auth_basic_user_file /etc/nginx/htpasswd;
+    }
   }
 }

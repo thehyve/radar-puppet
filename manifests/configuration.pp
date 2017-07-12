@@ -16,7 +16,7 @@ class radar::configuration (
     $radar_rest_topics = $radar::params::radar_rest_topics,
     $volume_1_dir = $radar::params::volume_1_dir,
     $volume_2_dir = $radar::params::volume_2_dir,
-
+    $output_users = $radar::params::output_users,
 ) inherits radar::params {
     require radar::user
     require radar::code
@@ -101,5 +101,16 @@ class radar::configuration (
     }
     file {"${dcompose_home}/etc/rest-api/radar.yml":
         content => epp('radar/rest-api.yml.epp', $rest_api_vars),
+    }
+
+    $output_users.each | Hash[String, String] $output_user | {
+        $htuser = $output_user[user]
+        $htpassword = $output_user[password]
+
+        exec { "add_${htuser}_to_htaccess":
+            command => "/bin/bash -c 'echo \"${htuser}:$(echo -n '${htpassword}' | /usr/bin/openssl passwd -apr1 -stdin)\" >> ${dcompose_home}/etc/htpasswd'",
+            unless  => "/bin/grep -ce '^${htuser}:' ${dcompose_home}/etc/htpasswd",
+            notify  => Service['radar-docker'],
+        }
     }
 }
