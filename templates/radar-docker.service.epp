@@ -1,0 +1,26 @@
+<%- | String  $user, String $docker_repo_dir,
+| -%>
+[Unit]
+Description=RADAR-Docker service
+After=docker.service
+BindsTo=docker.service
+Conflicts=shutdown.target reboot.target halt.target
+
+[Service]
+TimeoutStartSec=0
+TimeoutStopSec=30
+Restart=always
+RestartSec=10
+
+WorkingDirectory=/home/<%= $user -%>/radar-docker<%= $docker_repo_dir %>
+
+ExecStart=/usr/local/bin/docker-compose up
+
+ExecReload=/usr/local/bin/docker-compose restart
+
+ExecStop=/usr/local/bin/docker-compose down
+
+NotifyAccess=all
+
+[Install]
+WantedBy=multi-user.target

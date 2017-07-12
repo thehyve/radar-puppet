@@ -1,0 +1,27 @@
+<%- | String $mongo_password, String $radar_rest_topics,
+| -%>
+# Kafka consumer configuration
+name=radar-connector-mongodb-sink
+
+# Kafka connector configuration
+connector.class=org.radarcns.mongodb.MongoDbSinkConnector
+tasks.max=1
+
+# Topics that will be consumed
+topics=<%= $radar_rest_topics %>
+
+# MongoDB server
+mongo.host=hotstorage
+mongo.port=27017
+
+# MongoDB configuration
+mongo.username=radar
+mongo.password=<%= $mongo_password %>
+mongo.database=radarhot
+
+# Collection name for putting data into the MongoDB database. The {$topic} token will be replaced
+# by the Kafka topic name.
+#mongo.collection.format={$topic}
+
+# Factory class to do the actual record conversion
+record.converter.class=org.radarcns.sink.mongodb.RecordConverterFactoryRadar

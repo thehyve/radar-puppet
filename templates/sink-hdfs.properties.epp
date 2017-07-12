@@ -1,0 +1,11 @@
+<%- | String $radar_raw_topics,
+| -%>
+name=radar-hdfs-sink-android-15000
+connector.class=io.confluent.connect.hdfs.HdfsSinkConnector
+tasks.max=4
+topics=<%= $radar_raw_topics %>
+flush.size=80000
+rotate.interval.ms=900000
+hdfs.url=hdfs://hdfs-namenode:8020
+format.class=org.radarcns.sink.hdfs.AvroFormatRadar
+topics.dir=topicAndroidNew
