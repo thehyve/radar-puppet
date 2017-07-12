@@ -1,16 +1,16 @@
 # Puppet module of the RADAR docker-compose stack
 
-This installs the [RADAR docker-compose stack](https://github.com/RADAR-CNS/RADAR-Docker) using [Puppet](https://puppet.com). Once this puppet module leaves the RADAR docker-compose stack in a consistent state, so if puppet is no longer used the stack will remain fully functional.
+This installs the [RADAR docker-compose stack](https://github.com/RADAR-CNS/RADAR-Docker) using [Puppet](https://Puppet.com). This Puppet module leaves the RADAR docker-compose stack in a consistent state, so if Puppet is no longer used the stack will remain fully functional.
 
-The module will install docker-ce and docker-compose from the Docker repository as well as a `radar-docker` systemd service.
+The module will install `docker-ce` and `docker-compose` from the Docker repository as well as a `radar-docker` systemd service.
 
 ## Requirements
 
-This puppet module has been tested on Ubuntu 16.04 LTS with systemd, but it should also work with other Ubuntu 14.04 LTS, 16.10, 17.04 and 17.10 as long as they use systemd and the puppet systemd module is installed.
+This Puppet module has been tested on Ubuntu 16.04 LTS with systemd, but it should also work with Ubuntu versions 14.04 LTS, 16.10, 17.04 and 17.10 as long as they use systemd and the Puppet systemd module is installed.
 
 ## Configuration
 
-To use RADAR-docker in your projects, write `include radar` in your puppet manifest. This will update all RADAR-Docker configuration to the puppet configuration. Note that while puppet is running, it will revert any locally made changes to the RADAR-Docker configuration.
+To use RADAR-docker in your projects, write `include radar` in your Puppet manifest. This will update all RADAR-Docker configuration to the Puppet configuration. Note that while Puppet is running, it will revert any locally made changes to the RADAR-Docker configuration.
 
 The following properties are required to be set:
 
