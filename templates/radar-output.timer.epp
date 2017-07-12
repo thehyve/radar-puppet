@@ -5,7 +5,8 @@ BindsTo=radar-docker.service
 [Timer]
 OnBootSec=15min
 OnUnitActiveSec=1h
+Unit=radar-output.service
 
 [Install]
-WantedBy=radar-docker.service
+WantedBy=multi-user.target
 

@@ -1,0 +1,15 @@
+<%- | String  $user, String $docker_repo_dir,
+| -%>
+[Unit]
+Description=RADAR-Docker service
+After=radar-docker.service
+Conflicts=shutdown.target reboot.target halt.target
+
+[Service]
+
+WorkingDirectory=/home/<%= $user -%>/radar-docker<%= $docker_repo_dir %>
+
+ExecStart=/home/<%= $user -%>/radar-docker<%= $docker_repo_dir %>/bin/hdfs-restructure /topicAndroidNew output
+
+NotifyAccess=all
+

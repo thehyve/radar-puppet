@@ -56,4 +56,17 @@ class radar::service (
       hipchat_room    => 'CIDER',
       sender          => 'radar-puppet',
     }
+
+    ::systemd::unit_file { 'radar-output.service':
+        content => epp('radar/radar-output.service.epp', {'user' => $user, 'docker_repo_dir' => $docker_repo_dir}),
+    } ->
+    ::systemd::unit_file { 'radar-output.timer':
+        content => epp('radar/radar-output.timer.epp', {}),
+    } ~>
+    service {'radar-output.timer':
+        provider => systemd,
+        ensure   => running,
+        enable   => true,
+        require  => Service['radar-docker'],
+    }
 }
