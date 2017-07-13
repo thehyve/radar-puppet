@@ -11,6 +11,8 @@ class radar::configuration (
     $use_ssl   = $radar::params::use_ssl,
     $notification_from = $radar::params::notification_from,
     $notification_to = $radar::params::notification_to,
+    $notification_topics = $radar::params::notification_topics,
+    $notification_threshold = $radar::params::notification_threshold,
     $radar_topics      = $radar::params::radar_topics,
     $radar_raw_topics  = $radar::params::radar_raw_topics,
     $radar_rest_topics = $radar::params::radar_rest_topics,
