@@ -19,7 +19,7 @@ class radar {
     } ~>
     notifications::hipchat { 'test-msg':
       message         => "Config updated",
-      hipchat_room    => 'CIDER',
+      hipchat_room    => 'CHDR - CIDER',
       sender          => 'radar-puppet',
     }
 }
