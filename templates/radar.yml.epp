@@ -1,4 +1,4 @@
-<%- | String $notification_to, String $notification_from,
+<%- | String $notification_to, String $notification_from, Array $notification_topics, Array $notification_threshold,
 | -%>
 version: 1.0
 released: 2016-11-27
@@ -38,17 +38,6 @@ schema_registry:
       port: 8081
       protocol: http
 
-#========================= Battery level monitor=========================#
-battery_monitor:
-  level: CRITICAL
-  email_address:
-    - <%= $notification_to %>
-  email_host: smtp
-  email_port: 25
-  email_user: <%= $notification_from %>
-  topics:
-    - android_empatica_e4_battery_level
-
 #======================= Disconnection monitor==========================#
 disconnect_monitor:
   email_address:
@@ -56,6 +45,5 @@ disconnect_monitor:
   email_host: smtp
   email_port: 25
   email_user: <%= $notification_from %>
-  topics:
-    - android_empatica_e4_battery_level
-  timeout: 300000
+  topics: [<%= $notification_topics.join(', ') %>]
+  timeout: <%= $notification_threshold %>
