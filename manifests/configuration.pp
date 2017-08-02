@@ -46,6 +46,7 @@ class radar::configuration (
 
     $smtp_vars = {
         'smart_host' => $smtp_host,
+        'smart_port' => $smtp_port,
         'smart_user' => $smtp_user,
         'smart_pwd'  => $smtp_pwd,
     }

@@ -1,6 +1,6 @@
-<%- | String  $smart_host, String $smart_user, String $smart_pwd,
+<%- | String  $smart_host, String $smart_user, String $smart_pwd, Integer $smart_port,
 | -%>
 SMARTHOST_ADDRESS=<%= $smart_host -%>
-SMARTHOST_PORT=587
+SMARTHOST_PORT=<%= $smart_port %>
 SMARTHOST_USER=<%= $smart_user -%>
 SMARTHOST_PASSWORD=<%= $smart_pwd -%>
