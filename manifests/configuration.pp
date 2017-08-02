@@ -58,8 +58,10 @@ class radar::configuration (
     }
 
     $radar_vars = {
-        'notification_from' => $notification_from,
-        'notification_to' => $notification_to,
+        'notification_from'      => $notification_from,
+        'notification_to'        => $notification_to,
+        'notification_threshold' => $notification_threshold,
+        'notification_topics'    => $notification_topics,
     }
 
     file {"${dcompose_home}/etc/radar.yml":
