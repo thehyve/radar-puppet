@@ -19,6 +19,8 @@ class radar::configuration (
     $volume_1_dir = $radar::params::volume_1_dir,
     $volume_2_dir = $radar::params::volume_2_dir,
     $output_users = $radar::params::output_users,
+    $maintainer_email = $radar::params::maintainer_email,
+    $env = $radar::params::env,
 ) inherits radar::params {
     require radar::user
     require radar::code
@@ -40,6 +42,8 @@ class radar::configuration (
         'radar_rest_topics' => $radar_rest_topics,
         'volume_1_dir'      => $volume_1_dir,
         'volume_2_dir'      => $volume_2_dir,
+        'maintainer_email'  => $maintainer_email,
+        'env'               => $env,
     }
 
     file {"${dcompose_home}/.env":
