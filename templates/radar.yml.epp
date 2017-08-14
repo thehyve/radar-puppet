@@ -47,3 +47,7 @@ disconnect_monitor:
   email_user: <%= $notification_from %>
   topics: [<%= $notification_topics.join(', ') %>]
   timeout: <%= $notification_threshold %>
+
+stream_masters:
+  - org.radarcns.stream.phone.PhoneStreamMaster
+  - nl.thehyve.stream.nokia.NokiaStreamMaster
