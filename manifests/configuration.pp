@@ -52,6 +52,7 @@ class radar::configuration (
 
     $smtp_vars = {
         'smart_host' => $smtp_host,
+        'smart_port' => $smtp_port,
         'smart_user' => $smtp_user,
         'smart_pwd'  => $smtp_pwd,
     }
@@ -61,8 +62,10 @@ class radar::configuration (
     }
 
     $radar_vars = {
-        'notification_from' => $notification_from,
-        'notification_to' => $notification_to,
+        'notification_from'      => $notification_from,
+        'notification_to'        => $notification_to,
+        'notification_threshold' => $notification_threshold,
+        'notification_topics'    => $notification_topics,
     }
 
     file {"${dcompose_home}/etc/radar.yml":

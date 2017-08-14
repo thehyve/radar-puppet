@@ -6,6 +6,7 @@ class radar::params(
   $user                   = 'radar',
   $user_ssh_private_key   = '',
   $smtp_host              = 'smtp.gmail.com',
+  $smtp_port              = 587,
   $smtp_user              = 'radar@thehyve.nl',
   $smtp_pwd               = '',
   $hot_storage_pwd        = '',
