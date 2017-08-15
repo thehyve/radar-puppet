@@ -101,9 +101,6 @@ class radar::configuration (
         content => epp('radar/sink-mongo.properties.epp', $mongo_vars),
     }
 
-    file {"${dcompose_home}/etc/rest-api/device-catalog.yml":
-        source => "puppet:///modules/radar/device-catalog.yml",
-    }
     $rest_api_vars = {
         'host'           => $host,
         'mongo_password' => $hot_storage_pwd,
