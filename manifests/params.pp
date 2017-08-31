@@ -14,7 +14,9 @@ class radar::params(
   $use_ssl                = true,
   $notification_from      = 'radar@thehyve.nl',
   $notification_to        = 'radar@thehyve.nl',
-  $notification_threshold = 86400000,  # 24 hours in milliseconds
+  $notification_threshold = 86400,  # 24 hours in seconds
+  $notification_repeat_interval = 86400,
+  $notification_repetitions = 2,
   $volume_1_dir           = "/home/${user}/data",
   $volume_2_dir           = "/home/${user}/data",
   $output_users           = [],

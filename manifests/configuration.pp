@@ -12,6 +12,8 @@ class radar::configuration (
     $notification_from = $radar::params::notification_from,
     $notification_to = $radar::params::notification_to,
     $notification_threshold = $radar::params::notification_threshold,
+    $notification_repeat_interval = $radar::params::notification_repeat_interval,
+    $notification_repetitions = $radar::params::notification_repetitions,
     $radar_topics      = $radar::params::radar_topics,
     $radar_raw_topics  = $radar::params::radar_raw_topics,
     $radar_rest_topics = $radar::params::radar_rest_topics,
@@ -61,9 +63,11 @@ class radar::configuration (
     }
 
     $radar_vars = {
-        'notification_from'      => $notification_from,
-        'notification_to'        => $notification_to,
-        'notification_threshold' => $notification_threshold,
+        'notification_from'            => $notification_from,
+        'notification_to'              => $notification_to,
+        'notification_threshold'       => $notification_threshold,
+        'notification_repeat_interval' => $notification_repeat_interval,
+        'notification_repetitions'     => $notification_repetitions,
     }
 
     file {"${dcompose_home}/etc/radar.yml":

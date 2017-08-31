@@ -1,4 +1,6 @@
-<%- | String $notification_to, String $notification_from, Integer $notification_threshold,
+<%- | String $notification_to, String $notification_from,
+Integer $notification_threshold, Integer $notification_repeat_interval,
+Integer $notification_repetitions,
 | -%>
 version: 1.0
 released: 2016-11-27
@@ -49,7 +51,8 @@ disconnect_monitor:
     - topic: android_phone_acceleration
       source: Android
   timeout: <%= $notification_threshold %>
-  alert_repetitions: 2  # number of additional emails to send after the first
+  alert_repeat_interval: <%= $notification_repeat_interval %>
+  alert_repetitions: <%= $notification_repetitions %>
 
 # Acceleration value monitor. If more than 20 records outside -5 to 5 g range,
 # then send mail. Repeat message again after 50 extreme values.
