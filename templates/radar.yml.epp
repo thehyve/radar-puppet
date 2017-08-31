@@ -1,4 +1,6 @@
-<%- | String $notification_to, String $notification_from, Array $notification_topics, Integer $notification_threshold,
+<%- | String $notification_to, String $notification_from, Array $notification_topics,
+Integer $notification_threshold, Integer $notification_repeat_interval,
+Integer $notification_repetitions,
 | -%>
 version: 1.0
 released: 2016-11-27
@@ -46,7 +48,9 @@ disconnect_monitor:
   email_user: <%= $notification_from %>
   topics: [<%= $notification_topics.join(', ') %>]
   timeout: <%= $notification_threshold %>
+  alert_repeat_interval: <%= $notification_repeat_interval %>
+  alert_repetitions: <%= $notification_repetitions %>
 
 stream_masters:
   - org.radarcns.stream.phone.PhoneStreamMaster
-  - nl.thehyve.stream.nokia.NokiaStreamMaster
+  - nl.thehyve.stream.nokia.NokiaHealthStreamMaster

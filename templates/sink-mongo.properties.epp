@@ -25,3 +25,6 @@ mongo.database=radarhot
 
 # Factory class to do the actual record conversion
 record.converter.class=org.radarcns.sink.mongodb.RecordConverterFactoryRadar
+
+# Maximum number of records for mongodb buffer
+buffer.capacity=200000

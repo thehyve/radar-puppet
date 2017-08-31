@@ -8,7 +8,7 @@ Conflicts=shutdown.target reboot.target halt.target
 
 [Service]
 TimeoutStartSec=0
-TimeoutStopSec=30
+TimeoutStopSec=90
 Restart=always
 RestartSec=10
 
