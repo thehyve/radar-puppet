@@ -1,4 +1,4 @@
-<%- | String $notification_to, String $notification_from, Array $notification_topics,
+<%- | String $notification_to, String $notification_from,
 Integer $notification_threshold, Integer $notification_repeat_interval,
 Integer $notification_repetitions,
 | -%>
@@ -39,18 +39,61 @@ schema_registry:
       port: 8081
       protocol: http
 
-#======================= Disconnection monitor==========================#
+#======================== MONITORS ========================#
+
 disconnect_monitor:
   email_address:
     - <%= $notification_to %>
   email_host: smtp
   email_port: 25
   email_user: <%= $notification_from %>
-  topics: [<%= $notification_topics.join(', ') %>]
+  topics:
+    - topic: android_phone_acceleration
+      source: Android
   timeout: <%= $notification_threshold %>
   alert_repeat_interval: <%= $notification_repeat_interval %>
   alert_repetitions: <%= $notification_repetitions %>
 
+# Acceleration value monitor. If more than 20 records outside -5 to 5 g range,
+# then send mail. Repeat message again after 50 extreme values.
+extremes_monitor:
+  email_address:
+    - <%= $notification_to %>
+  email_host: smtp
+  email_port: 25
+  email_user: <%= $notification_from %>
+  messageAfter: 20
+  monitors:
+    - monitor_target: acceleration
+      topics:
+        - topic: android_phone_acceleration
+          source: Android
+      min_value: -5 #g
+      max_value: 5 #g
+      repeatMessageAfter: 432000  # 1 day * 5 Hz
+
+    - monitor_target: light
+      topics:
+        - topic: android_phone_light
+          source: Android
+      min_value: 0 #lx
+      max_value: 1_000_000 #lx
+      repeatMessageAfter: 17280  # 1 day * 1/5 Hz
+
+# Unchanging value monitor. Send message if value stays within certain range
+unchanging_monitor:
+  email_address:
+    - <%= $notification_to %>
+  email_host: localhost
+  email_port: 25
+  email_user: <%= $notification_from %>
+  message_after_seconds: <%= $notification_threshold %>  # 1 day
+  monitors:
+    - monitor_target: Acceleration
+      topics:
+        - topic: android_phone_acceleration
+          source: Android
+      difference_threshold: 0.008 # fraction difference between two values
+
 stream_masters:
   - org.radarcns.stream.phone.PhoneStreamMaster
-  - nl.thehyve.stream.nokia.NokiaHealthStreamMaster
