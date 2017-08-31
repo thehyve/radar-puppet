@@ -55,8 +55,10 @@ http {
       proxy_http_version 1.1;
     }
     location /api/ {
-      proxy_pass         http://rest-api:8080/radar/api/;
+      proxy_pass         http://radar-backend-monitor-disconnect:9000/;
       proxy_set_header   Host $host;
+      proxy_http_version 1.1;
+      proxy_set_header   Connection "";
     }
     location /frontend/config/ {
       proxy_pass         http://rest-api:8080/radar/frontend/;
@@ -98,7 +100,7 @@ http {
       proxy_set_header   Host $host;
       proxy_http_version 1.1;
       proxy_set_header   Connection "";
-      auth_basic "RADAR output";
+      auth_basic "RADAR Nokia Health Connector";
       auth_basic_user_file /etc/nginx/htpasswd;
     }
     location /nokia/frontend/ {
@@ -106,7 +108,7 @@ http {
       proxy_set_header   Host $host;
       proxy_http_version 1.1;
       proxy_set_header   Connection "";
-      auth_basic "RADAR output";
+      auth_basic "RADAR Nokia Health Connector";
       auth_basic_user_file /etc/nginx/htpasswd;
     }
   }
