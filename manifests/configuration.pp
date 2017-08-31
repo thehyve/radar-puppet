@@ -11,7 +11,6 @@ class radar::configuration (
     $use_ssl   = $radar::params::use_ssl,
     $notification_from = $radar::params::notification_from,
     $notification_to = $radar::params::notification_to,
-    $notification_topics = $radar::params::notification_topics,
     $notification_threshold = $radar::params::notification_threshold,
     $radar_topics      = $radar::params::radar_topics,
     $radar_raw_topics  = $radar::params::radar_raw_topics,
@@ -65,11 +64,11 @@ class radar::configuration (
         'notification_from'      => $notification_from,
         'notification_to'        => $notification_to,
         'notification_threshold' => $notification_threshold,
-        'notification_topics'    => $notification_topics,
     }
 
     file {"${dcompose_home}/etc/radar.yml":
         content => epp('radar/radar.yml.epp', $radar_vars),
+        replace => no,
     }
 
     $nginx_vars = {

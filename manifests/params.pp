@@ -14,7 +14,6 @@ class radar::params(
   $use_ssl                = true,
   $notification_from      = 'radar@thehyve.nl',
   $notification_to        = 'radar@thehyve.nl',
-  $notification_topics    = ['android_phone_battery_level'],
   $notification_threshold = 86400000,  # 24 hours in milliseconds
   $volume_1_dir           = "/home/${user}/data",
   $volume_2_dir           = "/home/${user}/data",
