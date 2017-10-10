@@ -94,6 +94,7 @@ class radar::configuration (
     }
     file {"${dcompose_home}/etc/sink-hdfs.properties":
         content => epp('radar/sink-hdfs.properties.epp', $hdfs_vars),
+        replace => no,
     }
 
     $mongo_vars = {
