@@ -17,7 +17,7 @@ class radar::docker (
     } ->
     package { 'docker-ce':
         ensure => present,
-    }
+    } ~>
     file_line { 'Docker without iptables':
         path   => '/lib/systemd/system/docker.service',
         line   => 'ExecStart=/usr/bin/dockerd -H fd:// --iptables=false',
