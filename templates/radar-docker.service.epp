@@ -2,9 +2,8 @@
 | -%>
 [Unit]
 Description=RADAR-Docker service
-After=docker.service
 BindsTo=docker.service
-Conflicts=shutdown.target reboot.target halt.target
+After=docker.service
 
 [Service]
 TimeoutStartSec=0

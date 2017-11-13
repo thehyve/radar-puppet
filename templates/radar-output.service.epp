@@ -3,7 +3,7 @@
 [Unit]
 Description=RADAR-Docker service
 After=radar-docker.service
-Conflicts=shutdown.target reboot.target halt.target
+Requires=docker.service
 
 [Service]
 
