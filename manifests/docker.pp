@@ -18,6 +18,12 @@ class radar::docker (
     package { 'docker-ce':
         ensure => present,
     }
+    file_line { 'Docker without iptables':
+        path   => '/lib/systemd/system/docker.service',
+        line   => 'ExecStart=/usr/bin/dockerd -H fd:// --iptables=false',
+        match  => '^ExecStart=/usr/bin/dockerd -H fd://',
+        ensure => present,
+    }
 
     $docker_compose = '/usr/local/bin/docker-compose'
 
