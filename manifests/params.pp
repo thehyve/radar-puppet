@@ -10,7 +10,7 @@ class radar::params(
   $smtp_user              = 'radar@thehyve.nl',
   $smtp_pwd               = '',
   $hot_storage_pwd        = '',
-  $docker_compose_version = '1.14.0',
+  $docker_compose_version = '1.17.1',
   $use_ssl                = true,
   $notification_from      = 'radar@thehyve.nl',
   $notification_to        = 'radar@thehyve.nl',
