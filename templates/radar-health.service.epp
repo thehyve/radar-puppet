@@ -1,7 +1,7 @@
 <%- | String  $user, String $docker_repo_dir,
 | -%>
 [Unit]
-Description=RADAR-Docker output service
+Description=RADAR-Docker check-health service
 After=radar-docker.service
 Requires=docker.service
 
@@ -9,7 +9,7 @@ Requires=docker.service
 
 WorkingDirectory=/home/<%= $user -%>/radar-docker<%= $docker_repo_dir %>
 
-ExecStart=/home/<%= $user -%>/radar-docker<%= $docker_repo_dir %>/bin/hdfs-restructure /topicAndroidNew output
+ExecStart=/home/<%= $user -%>/radar-docker<%= $docker_repo_dir %>/bin/healthcheck
 
 NotifyAccess=all
 

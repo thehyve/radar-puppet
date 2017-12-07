@@ -20,7 +20,7 @@ class radar::docker (
     } ~>
     file_line { 'Docker without iptables':
         path   => '/lib/systemd/system/docker.service',
-        line   => 'ExecStart=/usr/bin/dockerd -H fd:// --iptables=false --dns 8.8.8.8 --dns 8.8.4.4',
+        line   => 'ExecStart=/usr/bin/dockerd -H fd://',
         match  => '^ExecStart=/usr/bin/dockerd -H fd://',
         ensure => present,
     }

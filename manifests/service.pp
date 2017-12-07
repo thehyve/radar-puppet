@@ -69,4 +69,17 @@ class radar::service (
         enable   => true,
         require  => Service['radar-docker'],
     }
+
+    ::systemd::unit_file { 'radar-health.service':
+        content => epp('radar/radar-health.service.epp', {'user' => $user, 'docker_repo_dir' => $docker_repo_dir}),
+    } ->
+    ::systemd::unit_file { 'radar-health.timer':
+        content => epp('radar/radar-health.timer.epp', {}),
+    } ~>
+    service {'radar-health.timer':
+        provider => systemd,
+        ensure   => running,
+        enable   => true,
+        require  => Service['radar-docker'],
+    }
 }
