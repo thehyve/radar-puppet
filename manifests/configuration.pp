@@ -88,6 +88,9 @@ class radar::configuration (
             content => epp('radar/nginx.conf.epp', $nginx_vars),
         }
     }
+    file {"${dcompose_home}/etc/nginx.proxy.list":
+        content => epp('radar/nginx.proxy.list.epp', $nginx_vars),
+    }
 
     $hdfs_vars = {
         'radar_raw_topics'  => $radar_raw_topics,

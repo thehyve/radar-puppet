@@ -17,6 +17,14 @@ http {
   # add nosniff header (https://www.owasp.org/index.php/List_of_useful_HTTP_headers)
   add_header X-Content-Type-Options nosniff;
 
+  map $http_user_agent $isnothealthcheck {
+    default 1;
+    healthcheck 0;
+  }
+
+  access_log                /var/log/nginx/access.log combined if=$isnothealthcheck;
+  error_log                 /var/log/nginx/error.log;
+
   server {
     listen                    80 default_server;
     listen                    [::]:80 default_server;
@@ -53,9 +61,6 @@ http {
     ssl_certificate           /etc/letsencrypt/live/localhost/fullchain.pem;
     ssl_certificate_key       /etc/letsencrypt/live/localhost/privkey.pem;
     ssl_trusted_certificate   /etc/letsencrypt/live/localhost/chain.pem;
-
-    access_log                /var/log/nginx/access.log;
-    error_log                 /var/log/nginx/error.log;
 
     location /kafka/ {
       proxy_pass         http://gateway:8080/radar-gateway/;
