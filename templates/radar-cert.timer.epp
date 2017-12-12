@@ -1,0 +1,13 @@
+[Unit]
+Description=RADAR-Docker certificate renewal timer
+BindsTo=radar-docker.service
+
+[Timer]
+OnCalendar=daily
+RandomizedDelaySec=12h
+Persistent=true
+Unit=radar-cert.service
+
+[Install]
+WantedBy=multi-user.target
+

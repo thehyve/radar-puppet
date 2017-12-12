@@ -1,0 +1,15 @@
+<%- | String  $user, String $docker_repo_dir,
+| -%>
+[Unit]
+Description=RADAR-Docker certificate renewal
+After=radar-docker.service
+Requires=docker.service
+
+[Service]
+
+WorkingDirectory=/home/<%= $user -%>/radar-docker<%= $docker_repo_dir %>
+
+ExecStart=/home/<%= $user -%>/radar-docker<%= $docker_repo_dir %>/bin/renew-ssl-certificate
+
+NotifyAccess=all
+

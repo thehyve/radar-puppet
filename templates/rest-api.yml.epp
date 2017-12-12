@@ -1,4 +1,4 @@
-<%- | String $host, String $mongo_password,
+<%- | String $host, String $domain, String $mongo_password,
 | -%>
 version: 0.1
 released: 2017-05-10
@@ -10,7 +10,7 @@ swagger_version: 1.0.0
 application_protocol: https
 
 # Machine address hosting the APIs
-host: <%= $host %>
+host: <%= $host %>.<%= $domain %>
 
 # Base or Root path for the RESTFul interface
 api_base_path: api

@@ -4,6 +4,7 @@ class radar::service (
    $user = $radar::params::user,
    $volume_1_dir = $radar::params::volume_1_dir,
    $volume_2_dir = $radar::params::volume_2_dir,
+   $use_ssl = $radar::params::use_ssl,
 ) inherits radar::params {
     require radar::docker
     require radar::configuration
@@ -80,6 +81,19 @@ class radar::service (
         provider => systemd,
         ensure   => running,
         enable   => true,
+        require  => Service['radar-docker'],
+    }
+
+    ::systemd::unit_file { 'radar-cert.service':
+        content => epp('radar/radar-cert.service.epp', {'user' => $user, 'docker_repo_dir' => $docker_repo_dir}),
+    } ->
+    ::systemd::unit_file { 'radar-cert.timer':
+        content => epp('radar/radar-cert.timer.epp', {}),
+    } ~>
+    service {'radar-cert.timer':
+        provider => systemd,
+        ensure   => $use_ssl,
+        enable   => $use_ssl,
         require  => Service['radar-docker'],
     }
 }

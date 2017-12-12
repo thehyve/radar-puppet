@@ -1,3 +1,5 @@
+<%- | String $host, String $domain,
+| -%>
 worker_rlimit_nofile 8192;
 
 events {
@@ -28,7 +30,7 @@ http {
   server {
     listen                    80 default_server;
     listen                    [::]:80 default_server;
-    server_name               localhost;
+    server_name               <%= $host %>.<%= $domain %>;
 
     location /kafka/ {
       proxy_pass         http://gateway:8080/radar-gateway/;

@@ -1,5 +1,6 @@
 class radar::configuration (
     $host = lookup('slave_aspect::hostname'),
+    $domain = lookup('slave_aspect::domain_base', String, 'first', 'thehyve.net'),
     $hot_storage_pwd = $radar::params::hot_storage_pwd,
     $hot_storage_usr = $radar::params::hot_storage_usr,
     $hot_storage_name = $radar::params::hot_storage_name,
@@ -36,6 +37,7 @@ class radar::configuration (
 
     $env_vars = {
         'host'              => $host,
+        'domain'            => $domain,
         'use_ssl'           => $use_ssl,
         'hot_storage_pwd'   => $hot_storage_pwd ,
         'radar_topics'      => $radar_topics,
@@ -76,7 +78,8 @@ class radar::configuration (
     }
 
     $nginx_vars = {
-        # Nothing at the moment
+        'host'              => $host,
+        'domain'            => $domain,
     }
 
     if ($use_ssl) {
@@ -110,6 +113,7 @@ class radar::configuration (
 
     $rest_api_vars = {
         'host'           => $host,
+        'domain'         => $domain,
         'mongo_password' => $hot_storage_pwd,
     }
     file {"${dcompose_home}/etc/rest-api/radar.yml":
