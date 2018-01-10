@@ -13,7 +13,7 @@ RestartSec=10
 
 WorkingDirectory=/home/<%= $user -%>/radar-docker<%= $docker_repo_dir %>
 
-ExecStart=/usr/local/bin/docker-compose up
+ExecStart=/home/<%= $user -%>/radar-docker<%= $docker_repo_dir %>/bin/exec-radar-stack
 
 ExecReload=/usr/local/bin/docker-compose restart
 
