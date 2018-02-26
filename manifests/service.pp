@@ -59,7 +59,7 @@ class radar::service (
     }
 
     ::systemd::unit_file { 'radar-output.service':
-        content => epp('radar/radar-output.service.epp', {'user' => $user, 'docker_repo_dir' => $docker_repo_dir}),
+        content => epp('radar/radar-output.service.epp', {'user' => $user, 'docker_repo_dir' => $docker_repo_dir, 'volume_dir' => $volume_2_dir}),
     } ->
     ::systemd::unit_file { 'radar-output.timer':
         content => epp('radar/radar-output.timer.epp', {}),
