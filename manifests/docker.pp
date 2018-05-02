@@ -7,13 +7,21 @@ class radar::docker (
         fail("Only trusty is supported, not $::lsbdistcodename")
     }
 
+    $docker_keydata = {
+        'id'     => '9DC858229FC7DD38854AE2D88D81803C0EBFCD88',
+        'server' => 'keyserver.ubuntu.com'
+    }
+
+    $docker_includedata = {
+        'src' =>  false,
+    }
+
     apt::source { 'docker':
         location    => 'https://download.docker.com/linux/ubuntu',
         release     => $::lsbdistcodename,
         repos       => 'stable',
-        key         => '9DC858229FC7DD38854AE2D88D81803C0EBFCD88',
-        key_server  => 'keyserver.ubuntu.com',
-        include_src => false,
+        key         => $docker_keydata,
+        include     => $docker_includedata,
     } ->
     package { 'docker-ce':
         ensure => present,
