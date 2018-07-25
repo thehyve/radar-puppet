@@ -92,8 +92,8 @@ class radar::service (
     } ~>
     service {'radar-cert.timer':
         provider => systemd,
-        ensure   => $use_ssl,
-        enable   => $use_ssl,
+        ensure   => running,
+        enable   => true,
         require  => Service['radar-docker'],
     }
 }
