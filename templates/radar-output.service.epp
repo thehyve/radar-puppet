@@ -9,6 +9,7 @@ Requires=docker.service
 
 WorkingDirectory=/home/<%= $user -%>/radar-docker<%= $docker_repo_dir %>
 
+Environment="DOCKER_OPTS="
 ExecStart=/home/<%= $user -%>/radar-docker<%= $docker_repo_dir %>/bin/hdfs-restructure /topicAndroidNew <%= $volume_dir %>/output
 
 NotifyAccess=all
