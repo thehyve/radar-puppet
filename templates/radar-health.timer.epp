@@ -1,6 +1,5 @@
 [Unit]
 Description=RADAR-Docker frequent health-checks
-BindsTo=radar-docker.service
 
 [Timer]
 OnBootSec=10min
