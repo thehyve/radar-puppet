@@ -99,44 +99,47 @@ http {
       auth_basic "RADAR output";
       auth_basic_user_file /etc/nginx/htpasswd;
     }
-    location /nokia/0/ {
-      proxy_pass         http://radar-nokia-health-connector:9132/;
+    location ^~ /withings(.*) {
+      return 301 $scheme://$http_host/withings$1$is_args$query_string;
+    }
+    location /withings/0/ {
+      proxy_pass         http://radar-withings-connector:9132/;
       proxy_set_header   Host $host;
       proxy_http_version 1.1;
       proxy_set_header   Connection "";
     }
-    location /nokia/1/ {
-      proxy_pass         http://radar-nokia-health-connector:9133/;
+    location /withings/1/ {
+      proxy_pass         http://radar-withings-connector:9133/;
       proxy_set_header   Host $host;
       proxy_http_version 1.1;
       proxy_set_header   Connection "";
     }
-    location /nokia/2/ {
-      proxy_pass         http://radar-nokia-health-connector:9134/;
+    location /withings/2/ {
+      proxy_pass         http://radar-withings-connector:9134/;
       proxy_set_header   Host $host;
       proxy_http_version 1.1;
       proxy_set_header   Connection "";
     }
-    location /nokia/3/ {
-      proxy_pass         http://radar-nokia-health-connector:9135/;
+    location /withings/3/ {
+      proxy_pass         http://radar-withings-connector:9135/;
       proxy_set_header   Host $host;
       proxy_http_version 1.1;
       proxy_set_header   Connection "";
     }
-    location /nokia/backend/ {
-      proxy_pass         http://radar-nokia-health-connector:9131/;
+    location /withings/backend/ {
+      proxy_pass         http://radar-withings-connector:9131/;
       proxy_set_header   Host $host;
       proxy_http_version 1.1;
       proxy_set_header   Connection "";
-      auth_basic "RADAR Nokia Health Connector";
+      auth_basic "RADAR Withings Connector";
       auth_basic_user_file /etc/nginx/htpasswd;
     }
-    location /nokia/frontend/ {
-      proxy_pass         http://radar-nokia-health-portal/;
+    location /withings/frontend/ {
+      proxy_pass         http://radar-withings-portal/;
       proxy_set_header   Host $host;
       proxy_http_version 1.1;
       proxy_set_header   Connection "";
-      auth_basic "RADAR Nokia Health Connector";
+      auth_basic "RADAR Withings Connector";
       auth_basic_user_file /etc/nginx/htpasswd;
     }
   }
