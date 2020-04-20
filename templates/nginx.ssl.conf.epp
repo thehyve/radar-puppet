@@ -52,7 +52,7 @@ http {
     ssl_session_cache         shared:SSL:20m;
     ssl_session_timeout       10m;
 
-    ssl_protocols             TLSv1 TLSv1.1 TLSv1.2;
+    ssl_protocols             TLSv1.2;
     ssl_prefer_server_ciphers on;
     ssl_ciphers               "ECDH+AESGCM:ECDH+AES256:ECDH+AES128:!ADH:!AECDH:!MD5;";
 
@@ -73,10 +73,16 @@ http {
       client_max_body_size 24M;
     }
     location /schema/ {
+      limit_except GET OPTIONS {
+        deny all;
+      }
       proxy_pass         http://schema-registry-1:8081/;
       proxy_set_header   Host $host;
       proxy_http_version 1.1;
       proxy_set_header   Connection "";
+    }
+    location = /schema/application.wadl {
+      deny all;
     }
     location /dashboard/ {
       proxy_pass         http://dashboard:80/;
